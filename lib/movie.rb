@@ -11,8 +11,11 @@ class Movie
   end
 
   def to_s
-    original_title = @original_title == '' ? '' : " (#{@original_title})" 
-    "#{@titlefilm}#{original_title}, #{@release_date}, реж. #{@director.join(', ')}, рейтинг: #{show_rating} (#{@rate})" 
+    "#{@titlefilm} #{@original_title}, #{@release_date}, реж. #{directors_to_show}, рейтинг: #{show_rating} (#{@rate})" 
+  end
+
+  def to_file
+    [@titlefilm, @original_title, @release_date, @rate, @director.join('/'), @genres.join('/')].map{ |elem| "(#{elem})" }.join(',')
   end
 
   def show_rating
@@ -24,5 +27,9 @@ class Movie
       movie_rating << empty_star
     end
     movie_rating
+  end
+
+  def directors_to_show
+    @director.size > 1 ? @director.join(', ') : @director[0]
   end
 end

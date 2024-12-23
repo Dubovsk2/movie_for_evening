@@ -1,4 +1,5 @@
 require 'movie_list'
+require 'movie'
 
 describe MovieList do
   let(:movie_list) do
@@ -61,13 +62,13 @@ describe MovieList do
     end
   end
 
-  describe '#directors' do
+  describe '#directors_all' do
     it 'checks the class' do 
-      expect(movie_list.directors).to be_an(Array)
+      expect(movie_list.directors_all).to be_an(Array)
     end
 
     it 'selects directors only from movie list' do
-      expect(movie_list.directors).to eq(['Питер Джексон', 'Фрэнк Дарабонт'])
+      expect(movie_list.directors_all).to eq(['Питер Джексон', 'Фрэнк Дарабонт'])
     end
   end
 
@@ -81,26 +82,13 @@ describe MovieList do
     end
   end
 
-  describe '#movies_of_director(index)' do
-    it 'returns the Питер Джексон movies from movie_list' do
-      expect(movie_list.movies_of_director(1)).to contain_exactly(
-        an_object_having_attributes(
-          titlefilm: 'Властелин колец 2: Две крепости',
-          original_title: 'The Lord of the Rings: The Two Towers', 
-          release_date: 2002, 
-          rate: 9.38,
-          director: ['Питер Джексон'], 
-          genres: %w[боевик приключения фэнтези]
-        ),
-        an_object_having_attributes(
-          titlefilm: 'Властелин колец 3: Возвращение Короля',
-          original_title: 'The Lord of the Rings: The Return of the King', 
-          release_date: 2003, 
-          rate: 9.48,
-          director: ['Питер Джексон'], 
-          genres: %w[боевик приключения фэнтези]
-        )
-      )
+  describe '#genres_all' do
+    it 'checks the class of object in method' do
+      expect(movie_list.genres_all).to be_an(Array)
+    end
+  
+    it 'check the values of array' do
+      expect(movie_list.genres_all).to eq(%w[боевик приключения фэнтези драма])
     end
   end
 end
